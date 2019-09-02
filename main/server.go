@@ -25,7 +25,7 @@ func main() {
 
 	go func() {
 		for {
-			time.Sleep(2 * time.Second)
+			time.Sleep(24 * time.Hour)
 			count++
 		}
 	}()
