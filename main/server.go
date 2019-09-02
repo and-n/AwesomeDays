@@ -1,15 +1,22 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"net/http"
+	"os"
 	"strconv"
+	"strings"
 	"time"
 )
 
 var count = 0
 
 func main() {
+	scanner := bufio.NewReader(os.Stdin)
+	fmt.Println("need port")
+	port, _ := scanner.ReadString('\n')
+
 	fmt.Println("Server started!!")
 
 	http.HandleFunc("/help", getHelp)
@@ -22,7 +29,7 @@ func main() {
 			count++
 		}
 	}()
-	err := http.ListenAndServe(":80", nil)
+	err := http.ListenAndServe(":"+strings.Trim(port, "\n"), nil)
 
 	if err != nil {
 		fmt.Println("server error ", err)
