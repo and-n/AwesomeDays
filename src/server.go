@@ -63,7 +63,11 @@ func getDays(writer http.ResponseWriter, request *http.Request) {
 }
 
 func getHelp(w http.ResponseWriter, r *http.Request) {
-	Info.Println(w, "Days without Sergey's accident!")
+	Info.Println("heeeeelp!")
+	_, err := fmt.Fprint(w, "Days without Sergey's accident!")
+	if err != nil {
+		Error.Println("", err)
+	}
 }
 
 func startCounters() {
