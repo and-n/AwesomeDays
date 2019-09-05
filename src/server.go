@@ -71,10 +71,10 @@ func startCounters() {
 		for {
 			hour, min, _ := time.Now().Clock()
 			if hour == 0 && min == 0 {
-				time.Sleep(1 * time.Minute)
-			} else {
 				count++
 				break
+			} else {
+				time.Sleep(1 * time.Minute)
 			}
 		}
 		go func() {
