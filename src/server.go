@@ -18,7 +18,9 @@ var (
 )
 
 func init() {
+	log.SetOutput(os.Stdout)
 	count = funcs.LoadOldCount()
+
 	Info = log.New(os.Stdout,
 		"INFO: ",
 		log.LstdFlags)
@@ -28,9 +30,6 @@ func init() {
 }
 
 func main() {
-	//scanner := bufio.NewReader(os.Stdin)
-	//fmt.Println("need port")
-	//port, _ := scanner.ReadString('\n')
 	port := "8088"
 	Info.Println("Server started!!")
 	Info.Println("Days without Sergey's accident: ", count)
@@ -48,8 +47,8 @@ func main() {
 
 func getDays(writer http.ResponseWriter, request *http.Request) {
 	res := request.URL.Query().Get("hash")
+	writer.Header().Add("Access-Control-Allow-Origin", "*")
 	if request.Method == "GET" {
-		writer.Header().Add("Access-Control-Allow-Origin", "*")
 		_, err := fmt.Fprint(writer, strconv.Itoa(count))
 		if err != nil {
 			Error.Println("converter error", err)
@@ -90,6 +89,7 @@ func startCounters() {
 		go func() {
 			for {
 				time.Sleep(24 * time.Hour)
+				//time.Sleep(2 * time.Second)
 				count++
 				funcs.SaveCountToFile(count)
 			}
