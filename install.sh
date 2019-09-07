@@ -8,6 +8,6 @@ go build server.go
 
 pkill -f "server"
 
-nohup ./server &
+nohup ./server & >> ../server.log
 
 echo "completed"
