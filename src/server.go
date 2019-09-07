@@ -48,15 +48,20 @@ func main() {
 func getDays(writer http.ResponseWriter, request *http.Request) {
 	res := request.URL.Query().Get("hash")
 	writer.Header().Add("Access-Control-Allow-Origin", "*")
+	writer.Header().Add("Access-Control-Allow-Methods", "GET, DELETE, OPTIONS")
 	if request.Method == "GET" {
 		_, err := fmt.Fprint(writer, strconv.Itoa(count))
 		if err != nil {
 			Error.Println("converter error", err)
 		}
 	} else if request.Method == "DELETE" && res == "sr321" {
+		Info.Println("Days reset")
 		count = 0
 		writer.WriteHeader(200)
+	} else if request.Method == "OPTIONS" {
+		_, _ = fmt.Fprint(writer, "GET, DELETE, OPTIONS")
 	} else {
+		Info.Printf("unknown request from %s \n", request.Host)
 		writer.WriteHeader(400)
 	}
 
