@@ -1,12 +1,12 @@
 package functions
 
 import (
-	"bytes"
 	"fmt"
 	"io/ioutil"
 	"log"
 	"os"
 	"strconv"
+	"strings"
 )
 
 const fileName string = "count.val"
@@ -16,7 +16,7 @@ func LoadOldCount() int {
 	res, err := ioutil.ReadFile(fileName)
 	if err == nil {
 		log.Printf("loaded count %s", string(res))
-		var val, ei = strconv.Atoi(string(bytes.TrimSpace(res)))
+		var val, ei = strconv.Atoi(strings.TrimSpace(string(res)))
 		if ei != nil {
 			log.Println(ei)
 		}
