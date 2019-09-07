@@ -12,7 +12,7 @@ import (
 )
 
 var (
-	count = 0
+	count int
 	Info  *log.Logger
 	Error *log.Logger
 )
