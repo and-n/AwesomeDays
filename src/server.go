@@ -57,6 +57,7 @@ func getDays(writer http.ResponseWriter, request *http.Request) {
 	} else if request.Method == "DELETE" && res == "sr321" {
 		Info.Println("Days reset")
 		count = 0
+		funcs.SaveCountToFile(count)
 		writer.WriteHeader(200)
 	} else if request.Method == "OPTIONS" {
 		_, _ = fmt.Fprint(writer, "GET, DELETE, OPTIONS")
