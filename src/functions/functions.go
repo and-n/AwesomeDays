@@ -15,7 +15,10 @@ func LoadOldCount() int {
 	res, err := ioutil.ReadFile(fileName)
 	if err == nil {
 		log.Printf("loaded count %s", string(res))
-		var val, _ = strconv.Atoi(string(res))
+		var val, ei = strconv.Atoi(string(res))
+		if ei != nil {
+			log.Println(ei)
+		}
 		return val
 	} else {
 		log.Print(err.Error())
