@@ -16,6 +16,8 @@ func LoadOldCount() int {
 	if err == nil {
 		var val, _ = strconv.Atoi(string(res))
 		return val
+	} else {
+		log.Print(err.Error())
 	}
 	return 0
 }
