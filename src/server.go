@@ -49,6 +49,7 @@ func main() {
 func getDays(writer http.ResponseWriter, request *http.Request) {
 	res := request.URL.Query().Get("hash")
 	if request.Method == "GET" {
+		writer.Header().Add("Access-Control-Allow-Origin", "*")
 		_, err := fmt.Fprint(writer, strconv.Itoa(count))
 		if err != nil {
 			Error.Println("converter error", err)
@@ -64,9 +65,14 @@ func getDays(writer http.ResponseWriter, request *http.Request) {
 
 func getHelp(w http.ResponseWriter, r *http.Request) {
 	Info.Println("heeeeelp!")
-	_, err := fmt.Fprint(w, "Days without Sergey's accident!")
-	if err != nil {
-		Error.Println("", err)
+	if r.Method == "GET" {
+		w.Header().Add("Access-Control-Allow-Origin", "*")
+		_, err := fmt.Fprint(w, "Days without Sergey's accident!")
+		if err != nil {
+			Error.Println("", err)
+		}
+	} else {
+		w.WriteHeader(400)
 	}
 }
 
