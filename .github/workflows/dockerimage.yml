@@ -12,6 +12,7 @@ jobs:
     - uses: actions/checkout@v1
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag psih747/awesome-days:${date "+%y%m.%d%H"}
-        docker tag psih747/awesome-days:${date +%y%m.%d%H} psih747/awesome-days:latest
-        docker push 
+        docker build . --file Dockerfile --tag awesome-days:${date +'%y%m.%d'}
+        docker tag awesome-days:${date +'%y%m.%d'} psih747/awesome-days:${date +'%y%m.%d'}
+        docker tag awesome-days:${date +'%y%m.%d'} psih747/awesome-days:latest
+        docker push
